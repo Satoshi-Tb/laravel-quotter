@@ -12,13 +12,17 @@ RUN apt-get update && \
     groupadd gphp && \
     useradd php -g gphp 
 
+# Composer用のキャッシュフォルダ作成
+RUN mkdir -p /home/php/.composer/cache \                                                                          
+    && chown -R php:gphp /home/php/.composer
+
 #デフォルト命令を実行するユーザをrootからphpに変更
 USER php
 
 #作業ディレクトリを設定　
 #ホストOSの/srcの中身をコピー&所有者設定
 WORKDIR /var/www/html
-COPY --chown=php:gphp ./src /var/www/html/
+COPY --chown=php:gphp ./backend /var/www/html/
 
 #storage,bootstrap/cacheはwebサーバがアクセスするためパーミッションを変更
-RUN chmod -R 755 storage bootstrap/cache
+# RUN chmod -R 755 storage bootstrap/cache
