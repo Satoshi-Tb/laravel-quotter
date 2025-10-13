@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Quser;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -31,19 +32,22 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Quser::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+       $quser=Quser::create([
+           'user_name' => $request->name,
+           'display_name'=> $request->name,
+           'email' => $request->email,
+           'password' => Hash::make($request->password),
+           'created_at'=>now(),
+           'updated_at'=>now(),
+       ]);
 
-        event(new Registered($user));
+        event(new Registered($quser));
 
-        Auth::login($user);
+        Auth::login($quser);
 
         return redirect(route('dashboard', absolute: false));
     }
