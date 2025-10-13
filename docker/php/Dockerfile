@@ -5,10 +5,17 @@ COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
 #ライブラリのインストール等
 RUN apt-get update && \
-    apt-get -y install --no-install-recommends git unzip libzip-dev libicu-dev libonig-dev && \
+    apt-get -y install --no-install-recommends git unzip curl ca-certificates gnupg libzip-dev libicu-dev libonig-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     docker-php-ext-install intl pdo_mysql zip bcmath
+
+# Node.js (for Vite build tool, Tailwind, etc.)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # グループ、ユーザー作成
 RUN groupadd gphp && \
