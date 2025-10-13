@@ -8,13 +8,15 @@ RUN apt-get update && \
     apt-get -y install --no-install-recommends git unzip libzip-dev libicu-dev libonig-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    docker-php-ext-install intl pdo_mysql zip bcmath && \
-    groupadd gphp && \
-    useradd php -g gphp 
+    docker-php-ext-install intl pdo_mysql zip bcmath
+
+# グループ、ユーザー作成
+RUN groupadd gphp && \
+    useradd -m -d /home/php -g gphp -s /bin/bash php
 
 # Composer用のキャッシュフォルダ作成
 RUN mkdir -p /home/php/.composer/cache \                                                                          
-    && chown -R php:gphp /home/php/.composer
+    && chown -R php:gphp /home/php
 
 #デフォルト命令を実行するユーザをrootからphpに変更
 USER php
