@@ -1,0 +1,6 @@
+# Reduce the Docker build context to avoid copying host-installed dependencies.
+**/node_modules
+backend/vendor
+frontend/vendor
+.git
+.gitmodules

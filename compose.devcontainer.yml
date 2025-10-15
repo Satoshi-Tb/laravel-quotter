@@ -1,0 +1,7 @@
+services:
+  nginx:
+    profiles: ["nginx"]
+
+  php:
+    ports:
+      - "8000:8000"
