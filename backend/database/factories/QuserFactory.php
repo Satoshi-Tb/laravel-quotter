@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Quser>
@@ -19,11 +19,11 @@ class QuserFactory extends Factory
     {
         return [
             'user_name' => $this->faker->regexify('[a-zA-Z0-9]{10}'),
-            'display_name'=> $this->faker->firstName,
+            'display_name' => $this->faker->firstName,
             'email' => $this->faker->safeEmail,
             'password' => Hash::make('password'),  // パスワードは固定
-            'created_at'=>now(),
-            'updated_at'=>now(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

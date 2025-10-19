@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Quser;
+use Illuminate\Database\Seeder;
 
 class QuserSeeder extends Seeder
 {
@@ -13,6 +12,6 @@ class QuserSeeder extends Seeder
      */
     public function run(): void
     {
-       Quser::factory()->count(10)->create();
+        Quser::factory()->count(10)->create();
     }
 }

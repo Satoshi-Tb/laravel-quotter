@@ -17,10 +17,10 @@ class QuootFactory extends Factory
     public function definition(): array
     {
         return [
-           'user_id' => random_int(1,2),
-           'content'=> $this->faker->sentence,
-           'created_at'=>now(),
-           'updated_at'=>now(),
+            'user_id' => random_int(1, 2),
+            'content' => $this->faker->sentence,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }
