@@ -4,19 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property-read Quser|null $quser
+ */
 class Quoot extends Model
 {
     /** @use HasFactory<\Database\Factories\QuootFactory> */
     use HasFactory;
 
-    public function quser()
+    public function quser(): BelongsTo
     {
         return $this->belongsTo(Quser::class, 'user_id');
     }
 
-    public function getDisplayName()
+    public function getDisplayName(): ?string
     {
-        return $this->quser->display_name;
+        return $this->quser?->display_name;
     }
 }
