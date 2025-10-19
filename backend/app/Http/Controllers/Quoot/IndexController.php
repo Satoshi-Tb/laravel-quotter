@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Quoot;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Quoot;
+use App\Models\Quser;
 
 class IndexController extends Controller
 {
@@ -14,11 +16,25 @@ class IndexController extends Controller
     public function __invoke(Request $request)
     {
         $quoots = Quoot::all();
-        return view('quoot.index')->with(
-            [
-            'userName' => 'test_user',
-            'quoots' => $quoots
-            ]
-        );
+        $loginId = Auth::id();
+        if ($loginId) {
+            $loginUser = Quser::where('id', $loginId)->first();
+            return view('quoot.index')->with(
+                [
+                'userName' => $loginUser->user_name,
+                'quoots' => $quoots
+                ]
+            );
+
+        } else {
+
+            return view('quoot.index')->with(
+                [
+                'quoots' => $quoots
+                ]
+            );
+
+        }
+
     }
 }

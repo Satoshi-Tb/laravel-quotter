@@ -9,8 +9,10 @@
 </head>
 <body>
     <h1>Quotter</h1>
-    <button onClick="location.href='/quoot/create'">Quoot作成画面へ</button>
-    <button onClick="location.href='/user/{{$userName}}'">マイページへ</button>
+    @if (\Illuminate\Support\Facades\Auth::check())
+        <button onClick="location.href='/quoot/create'">Quoot作成画面へ</button>
+        <button onClick="location.href='/user/{{$userName}}'">マイページへ</button>
+    @endif
     @foreach ($quoots as $quoot)
         <div style="border: 1px solid black; margin: 10px; padding: 10px;">
             <p>Quoot ID: {{$quoot->id}}</p>
