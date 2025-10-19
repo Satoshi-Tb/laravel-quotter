@@ -1,0 +1,11 @@
+services:
+  php:
+    build:
+      dockerfile: .devcontainer/php/Dockerfile
+      context: .
+    volumes:
+      - ./backend:/var/www/html
+    tty: true
+
+  nginx:
+    profiles: ["prod"]

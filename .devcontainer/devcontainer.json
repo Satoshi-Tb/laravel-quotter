@@ -1,22 +1,21 @@
 {
   "name": "Laravel Quotter",
-  "dockerComposeFile": ["../compose.yml", "../compose.devcontainer.yml"],
+  "dockerComposeFile": ["../compose.yml", "./compose.devcontainer.yml"],
   "service": "php",
   "workspaceFolder": "/var/www/html",
   "remoteUser": "php",
   "shutdownAction": "stopCompose",
-  "forwardPorts": [8000, 3306],
   "mounts": [
     "source=${localWorkspaceFolder}/backend,target=/var/www/html,type=bind"
   ],
-  "postCreateCommand": "composer install",
-  // "postCreateCommand": "composer install && npm install && php artisan key:generate",
+  "postStartCommand": "bash -lc \"pgrep -f 'php artisan serve' >/dev/null || nohup php artisan serve --host=0.0.0.0 --port=8000 >/tmp/artisan-serve.log 2>&1 &\"",
   "customizations": {
     "vscode": {
       "extensions": [
         "bmewburn.vscode-intelephense-client",
         "onecentlin.laravel-blade",
-        "amiralizadeh9480.laravel-extra-intellisense"
+        "amiralizadeh9480.laravel-extra-intellisense",
+        "xdebug.php-debug"
       ],
       "settings": {
         "php.validate.executablePath": "/usr/local/bin/php"
