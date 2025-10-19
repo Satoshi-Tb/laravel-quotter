@@ -9,4 +9,14 @@ class Quoot extends Model
 {
     /** @use HasFactory<\Database\Factories\QuootFactory> */
     use HasFactory;
+
+    public function quser()
+    {
+        return $this->belongsTo(Quser::class, 'user_id');
+    }
+
+    public function getDisplayName()
+    {
+        return $this->quser->display_name;
+    }
 }

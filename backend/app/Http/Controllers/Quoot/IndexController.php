@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Quoot;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Quoot;
 
 class IndexController extends Controller
 {
@@ -12,8 +13,12 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('quoot.index', [
+        $quoots = Quoot::all();
+        return view('quoot.index')->with(
+            [
             'userName' => 'user1',
-        ]);
+            'quoots' => $quoots
+            ]
+        );
     }
 }

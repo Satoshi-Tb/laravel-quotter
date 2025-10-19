@@ -15,4 +15,9 @@ class Quser extends Authenticatable
         'email',
         'password',
     ];
+
+    public function quoots()
+    {
+        return $this->hasMany(Quoot::class);
+    }
 }
