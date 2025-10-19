@@ -12,5 +12,14 @@
     <h2>ユーザ {{$userName}} のページ</h2>
     <button onClick="location.href='/user{{$userName}}/follows'">フォローリストへ</button>
     <button onClick="location.href='/user/{{$userName}}/followers'">フォロワーリストへ</button>
+    @foreach ($quoots as $quoot)
+        <div style="border: 1px solid black; margin: 10px; padding: 10px;">
+            <p>Quoot ID: {{$quoot->id}}</p>
+            <p>内容: {{$quoot->content}}</p>
+            <p>作成者: {{$quoot->getDisplayName()}}</p>
+            <p>作成日: {{$quoot->created_at}}</p>
+            <button onClick="location.href='/quoot/{{$quoot->id}}'">詳細へ</button>
+        </div>
+    @endforeach
 </body>
 </html>

@@ -16,7 +16,7 @@ class IndexController extends Controller
         $quoots = Quoot::all();
         return view('quoot.index')->with(
             [
-            'userName' => 'user1',
+            'userName' => 'test_user',
             'quoots' => $quoots
             ]
         );
