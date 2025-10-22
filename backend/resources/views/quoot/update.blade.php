@@ -16,12 +16,12 @@
             @csrf           
             <div>
                 <label for="content">内容:</label><br>
-                <textarea id="quoot-content" tyep="text" name="quoot" rows="4" cols="50" required>{{$content}}</textarea>
+                <textarea id="quoot-content" type="text" name="quoot" rows="4" cols="50" required>{{$content}}</textarea>
             </div>
             <div>
                 <button type="submit">更新</button>
                 <button type="reset">リセット</button>
-                <button onClick="location.href='/user/{{$userName}}'">戻る</button>
+                <button type="button" onClick="location.href='/user/{{$userName}}'">戻る</button>
             </div>
         </form>
     </div>
