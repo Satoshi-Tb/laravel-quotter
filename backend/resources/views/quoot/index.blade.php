@@ -19,7 +19,6 @@
             <p>内容: {{$quoot->content}}</p>
             <p>作成者: {{$quoot->getDisplayName()}}</p>
             <p>作成日: {{$quoot->created_at}}</p>
-            <button onClick="location.href='/quoot/{{$quoot->id}}'">詳細へ</button>
         </div>
     @endforeach
 </body>

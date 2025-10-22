@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Quoot\Create;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Quoot\CreateRequest;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Quoot;
 
 class PostController extends Controller

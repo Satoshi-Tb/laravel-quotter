@@ -8,19 +8,20 @@
     <title>Quotter</title>
 </head>
 <body>
-    <h1>Quotter作成画面</h1>
+    <h1>Quotter更新画面</h1>
     <div>
-        <p>投稿フォーム</p>
-        <form method="POST" action="/quoot/create">
-            @csrf
+        <p>更新フォーム</p>
+        <form method="POST" action="/quoot/update/{{$quootId}}">
+            @method('PUT')
+            @csrf           
             <div>
                 <label for="content">内容:</label><br>
-                <textarea id="quoot-content" tyep="text" name="quoot" rows="4" cols="50" required></textarea>
+                <textarea id="quoot-content" tyep="text" name="quoot" rows="4" cols="50" required>{{$content}}</textarea>
             </div>
             <div>
-                <button type="submit">投稿</button>
+                <button type="submit">更新</button>
                 <button type="reset">リセット</button>
-                <button onClick="location.href='/quoot'">戻る</button>
+                <button onClick="location.href='/user/{{$userName}}'">戻る</button>
             </div>
         </form>
     </div>

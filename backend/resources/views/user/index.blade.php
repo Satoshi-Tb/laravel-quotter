@@ -10,6 +10,7 @@
 <body>
     <h1>Quotter</h1>
     <h2>ユーザ {{$userName}} のページ</h2>
+    <button onClick="location.href='/quoot'">Quoot一覧へ</button>
     <button onClick="location.href='/user{{$userName}}/follows'">フォローリストへ</button>
     <button onClick="location.href='/user/{{$userName}}/followers'">フォロワーリストへ</button>
     @foreach ($quoots as $quoot)
@@ -18,7 +19,7 @@
             <p>内容: {{$quoot->content}}</p>
             <p>作成者: {{$quoot->getDisplayName()}}</p>
             <p>作成日: {{$quoot->created_at}}</p>
-            <button onClick="location.href='/quoot/{{$quoot->id}}'">詳細へ</button>
+            <button onClick="location.href='/quoot/update/{{$quoot->id}}'">修正</button>
         </div>
     @endforeach
 </body>
