@@ -22,7 +22,7 @@
             <!-- ログインユーザーIDの場合、修正・削除可能 -->
             @if (\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::id() === $quoot->user_id)
                 <button onClick="location.href='/quoot/update/{{$quoot->id}}?redirect=/quoot'">修正</button>
-                <form method="POST" action="{{ route('quoot.delete', ['quootId' => $quoot->id]) }}" style="display: inline;">
+                <form method="POST" action="{{ route('quoot.delete', ['quootId' => $quoot->id, 'redirect' => '/quoot']) }}" style="display: inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>

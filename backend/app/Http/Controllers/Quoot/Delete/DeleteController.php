@@ -15,11 +15,17 @@ class DeleteController extends Controller
     public function __invoke(Request $request, int $quootId)
     {
         $userId = Auth::id();
-        $quoot = Quoot::where('id', $quootId)->FirstOrFail();
+        $quoot = Quoot::where('id', $quootId)->firstOrFail();
         if ($userId === $quoot->user_id) {
+            $redirect_path = $request->input('redirect', '/quoot');
             $quoot->delete();
-            // 削除後、Quoot一覧ページにリダイレクト
-            return redirect()->route('quoot.index');
+
+            // 許可済みのアプリ内パス以外の場合、一覧画面に戻す。
+            if (!preg_match('#^/(?:quoot|user/[^/]+)$#', $redirect_path)) {
+                $redirect_path = '/quoot';
+            }
+
+            return redirect($redirect_path);
         } else {
             abort(403);
         }
