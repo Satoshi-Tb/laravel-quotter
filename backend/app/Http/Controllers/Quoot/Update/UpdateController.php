@@ -19,6 +19,8 @@ class UpdateController extends Controller
         $quser = Quser::where('id', $userId)->firstOrFail();
         $quoot = Quoot::where('id', $quootId)->firstOrFail();
 
+        // logger()->info('UpdateController invoked', ['userId' => $userId, 'quootId' => $quootId]);
+
         if ($userId === $quoot->user_id) {
             $redirectPath = $request->query('redirect', '/quoot');
 
