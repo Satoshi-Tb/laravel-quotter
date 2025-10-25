@@ -20,11 +20,19 @@ class UpdateController extends Controller
         $quoot = Quoot::where('id', $quootId)->firstOrFail();
 
         if ($userId === $quoot->user_id) {
+            $redirectPath = $request->query('redirect', '/quoot');
+
+            // 許可済みのアプリ内パス以外の場合、一覧画面に戻す。
+            if (!is_string($redirectPath) || !preg_match('#^/(?:quoot|user/[^/]+)$#', $redirectPath)) {
+                $redirectPath = '/quoot';
+            }
+
             return view('quoot.update')->with(
                 [
                 'quootId' => $quoot->id,
                 'content' => $quoot->content,
                 'userName' => $quser->user_name,
+                'redirectPath' => $redirectPath,
                 ]
             );
         } else {

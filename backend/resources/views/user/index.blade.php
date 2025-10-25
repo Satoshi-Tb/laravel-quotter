@@ -19,7 +19,7 @@
             <p>内容: {{$quoot->content}}</p>
             <p>作成者: {{$quoot->getDisplayName()}}</p>
             <p>作成日: {{$quoot->created_at}}</p>
-            <button onClick="location.href='/quoot/update/{{$quoot->id}}'">修正</button>
+            <button onClick="location.href='/quoot/update/{{$quoot->id}}?redirect=/user/{{rawurlencode($userName)}}'">修正</button>
             <form method="POST" action="{{ route('quoot.delete', ['quootId' => $quoot->id]) }}" style="display: inline;">
                 @csrf
                 @method('DELETE')

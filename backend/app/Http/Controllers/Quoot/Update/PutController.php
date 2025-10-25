@@ -20,8 +20,15 @@ class PutController extends Controller
         if ($userId === $quoot->user_id) {
             $quoot->content = $request->getQuoot();
             $quoot->save();
-            // 更新後、Quoot一覧ページにリダイレクト
-            return redirect()->route('quoot.index');
+
+            $redirectPath = $request->input('redirect', '/quoot');
+
+            // 許可済みのアプリ内パス以外の場合、一覧画面に戻す。
+            if (!is_string($redirectPath) || !preg_match('#^/(?:quoot|user/[^/]+)$#', $redirectPath)) {
+                $redirectPath = '/quoot';
+            }
+
+            return redirect($redirectPath);
         } else {
             abort(403);
         }
