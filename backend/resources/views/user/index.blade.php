@@ -13,6 +13,20 @@
     <button onClick="location.href='/quoot'">Quoot一覧へ</button>
     <button onClick="location.href='/user/{{$userName}}/follows'">フォローリストへ</button>
     <button onClick="location.href='/user/{{$userName}}/followers'">フォロワーリストへ</button>
+    @if (! $isMyPage)
+        @if (! $hasFollowed)
+            <form method="POST" action="/user/{{$userName}}/follow" style="display: inline;">
+                @csrf
+                <button type="submit">フォローする</button>
+            </form>
+        @else
+            <form method="POST" action="/user/{{$userName}}/follow" style="display: inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" onclick="return confirm('本当に解除しますか？')">フォロー解除</button>
+            </form>
+        @endif
+    @endif
     @foreach ($quoots as $quoot)
         <div style="border: 1px solid black; margin: 10px; padding: 10px;">
             <p>Quoot ID: {{$quoot->id}}</p>
@@ -20,7 +34,7 @@
             <p>作成者: {{$quoot->getDisplayName()}}</p>
             <p>作成日: {{$quoot->created_at}}</p>
             <!-- ログインユーザーIDの場合、修正・削除可能 -->
-            @if (\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::id() === $quoot->user_id)
+            @if ($isMyPage)
                 <button onClick="location.href='/quoot/update/{{$quoot->id}}?redirect=/user/{{rawurlencode($userName)}}'">修正</button>
                 <form method="POST" action="{{ route('quoot.delete', ['quootId' => $quoot->id, 'redirect' => '/user/' . rawurlencode($userName)]) }}" style="display: inline;">
                     @csrf

@@ -12,12 +12,14 @@
     @if (\Illuminate\Support\Facades\Auth::check())
         <button onClick="location.href='/quoot/create'">Quoot作成画面へ</button>
         <button onClick="location.href='/user/{{rawurlencode($userName)}}'">マイページへ</button>
+    @else
+        <button onClick="location.href='/login'">ログイン画面へ</button>
     @endif
     @foreach ($quoots as $quoot)
         <div style="border: 1px solid black; margin: 10px; padding: 10px;">
             <p>Quoot ID: {{$quoot->id}}</p>
             <p>内容: {{$quoot->content}}</p>
-            <p>作成者: {{$quoot->getDisplayName()}}</p>
+            <p>作成者: <a href="/user/{{$quoot->quser->user_name}}">{{$quoot->getDisplayName()}}</a></p>
             <p>作成日: {{$quoot->created_at}}</p>
             <!-- ログインユーザーIDの場合、修正・削除可能 -->
             @if (\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::id() === $quoot->user_id)
