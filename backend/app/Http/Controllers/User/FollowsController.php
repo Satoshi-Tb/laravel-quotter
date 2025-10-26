@@ -18,10 +18,10 @@ class FollowsController extends Controller
         $quser = Quser::where('user_name', $userName)->firstOrFail();
 
         // followsテーブルのfollowing_user_idフィールドをユーザIDで検索
-        $followedUserIds = Follows::where('following_user_id', $quser->id)->get() ?? [];
+        $followedUserIds = Follows::where('following_user_id', $quser->id)->get();
 
         // 検索結果のfollowed_user_idフィールドの値でqusersテーブルを検索しリストを作る
-        $followedUsers = Quser::whereIn('id', $followedUserIds->pluck('followed_user_id'))->get() ?? [];
+        $followedUsers = Quser::whereIn('id', $followedUserIds->pluck('followed_user_id'))->get();
 
         // リストをViewに渡す。
         return view('user.follows')->with(
