@@ -19,9 +19,10 @@ class FollowUserController extends Controller
         $followedUser = Quser::where('user_name', $userName)->firstOrFail();
 
         // データ登録済かどうかチェックする
-        $existingFollow = Follows::where('following_user_id', Auth::id())
-            ->where('followed_user_id', $followedUser->id)
-            ->first();
+        $existingFollow = Follows::where([
+            ['following_user_id', Auth::id()],
+            ['followed_user_id', $followedUser->id]
+        ])->first();
 
         // まだ登録されていなければフォロー処理を実行する
         if (!$existingFollow) {

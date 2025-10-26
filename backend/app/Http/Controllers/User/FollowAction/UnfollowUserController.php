@@ -19,9 +19,10 @@ class UnfollowUserController extends Controller
         $followedUser = Quser::where('user_name', $userName)->firstOrFail();
 
         // フォローレコードを削除する
-        Follows::where('following_user_id', Auth::id())
-            ->where('followed_user_id', $followedUser->id)
-            ->delete();
+        Follows::where([
+            ['following_user_id', Auth::id()],
+            ['followed_user_id', $followedUser->id]
+        ])->delete();
 
         // フォロー解除後、元のユーザーページにリダイレクトする。
         return redirect()->route('user.index', ['userName' => $userName]);
