@@ -10,6 +10,7 @@
 <body>
     <h1>Quotter</h1>
     <h2>ユーザ {{$userName}} のページ</h2>
+    <p>{{$profile}}</p>
     <button onClick="location.href='/quoot'">Quoot一覧へ</button>
     <button onClick="location.href='/user/{{$userName}}/follows'">フォローリストへ</button>
     <button onClick="location.href='/user/{{$userName}}/followers'">フォロワーリストへ</button>
@@ -31,6 +32,8 @@
             @csrf
             <button type="submit">チャットを開始する</button>
         </form>
+    @else
+        <button onClick="location.href='/user/{{$userName}}/edit'">プロフィール編集</button>
     @endif
     @foreach ($quoots as $quoot)
         <div style="border: 1px solid black; margin: 10px; padding: 10px;">

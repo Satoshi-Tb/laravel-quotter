@@ -30,6 +30,7 @@ class UserController extends Controller
         return view('user.index')->with([
             'userName' => $userName,
             'displayName' => $quser->display_name,
+            'profile' => $quser->profile,
             'quoots' => $quoots,
             'hasFollowed' => $hasFollowed,
             'isMyPage' => $isMyPage,

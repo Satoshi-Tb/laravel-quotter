@@ -22,6 +22,8 @@ Route::get('/user/{userName}/followers', App\Http\Controllers\User\FollowersCont
 Route::get('/chat/{chatId}', App\Http\Controllers\Chat\ChatController::class)->middleware('auth')->name('chat.index');
 Route::post('/chat/{chatId}/messages', App\Http\Controllers\Chat\MessagePostController::class)->middleware('auth');
 Route::post('/user/{userName}/chat', App\Http\Controllers\Chat\MakeChatRoomController::class)->middleware('auth');
+Route::get('/user/{userName}/edit', App\Http\Controllers\User\Edit\EditController::class)->middleware('auth')->name('user.edit');
+Route::put('/user/{userName}/edit', App\Http\Controllers\User\Edit\EditPutController::class)->middleware('auth')->name('user.edit.put');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
