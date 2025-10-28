@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Chat;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Message\CreateRequest;
 use App\Models\Message;
+use App\Models\Chat;
 
 class MessagePostController extends Controller
 {
@@ -15,7 +16,12 @@ class MessagePostController extends Controller
     {
         $messageContent = $request->getMessage();
         $userId = $request->getUserId();
+        $chat = Chat::where('id', $chatId)->firstOrFail();
 
+        // チャットルームに参加しているユーザーか確認する
+        if (!($chat->user1_id === $userId || $chat->user2_id === $userId)) {
+            abort(403);
+        }
         // メッセージの保存処理
         $message = new Message();
         $message->chat_id = $chatId;
