@@ -19,7 +19,8 @@ Route::post('/user/{userName}/follow', App\Http\Controllers\User\FollowAction\Fo
 Route::delete('/user/{userName}/follow', App\Http\Controllers\User\FollowAction\UnfollowUserController::class)->middleware('auth');
 Route::get('/user/{userName}/follows', App\Http\Controllers\User\FollowsController::class);
 Route::get('/user/{userName}/followers', App\Http\Controllers\User\FollowersController::class);
-Route::get('/chat/{chatId}', App\Http\Controllers\Chat\ChatController::class);
+Route::get('/chat/{chatId}', App\Http\Controllers\Chat\ChatController::class)->middleware('auth')->name('chat.index');
+Route::post('/chat/{chatId}/messages', App\Http\Controllers\Chat\MessagePostController::class)->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

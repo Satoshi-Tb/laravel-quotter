@@ -11,6 +11,14 @@
     <h1>Quotter</h1>
     <h2>{{$chatId}} 番の部屋</h2>
     <p>{{$users[0]}}と{{$users[1]}}のチャット部屋</p>
+    <!-- メッセージ投稿 -->
+    <form action="/chat/{{$chatId}}/messages" method="post">
+        @csrf
+        <textarea id="message-content" name="message" rows="4" cols="40" placeholder="メッセージを入力"></textarea><br>
+        <input type="submit" value="送信">
+        <input type="reset" value="クリア">
+    </form>
+
     <h3>メッセージ一覧</h3>
     <!-- 時刻、メッセージ、投稿者を表示 -->
     <ul>
