@@ -21,6 +21,7 @@ Route::get('/user/{userName}/follows', App\Http\Controllers\User\FollowsControll
 Route::get('/user/{userName}/followers', App\Http\Controllers\User\FollowersController::class);
 Route::get('/chat/{chatId}', App\Http\Controllers\Chat\ChatController::class)->middleware('auth')->name('chat.index');
 Route::post('/chat/{chatId}/messages', App\Http\Controllers\Chat\MessagePostController::class)->middleware('auth');
+Route::post('/user/{userName}/chat', App\Http\Controllers\Chat\MakeChatRoomController::class)->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -26,6 +26,11 @@
                 <button type="submit" onclick="return confirm('本当に解除しますか？')">フォロー解除</button>
             </form>
         @endif
+        <!-- チャットを開始する -->
+        <form method="POST" action="/user/{{$userName}}/chat">
+            @csrf
+            <button type="submit">チャットを開始する</button>
+        </form>
     @endif
     @foreach ($quoots as $quoot)
         <div style="border: 1px solid black; margin: 10px; padding: 10px;">
