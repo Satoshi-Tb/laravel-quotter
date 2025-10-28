@@ -11,5 +11,15 @@
     <h1>Quotter</h1>
     <h2>{{$chatId}} 番の部屋</h2>
     <p>{{$users[0]}}と{{$users[1]}}のチャット部屋</p>
+    <h3>メッセージ一覧</h3>
+    <!-- 時刻、メッセージ、投稿者を表示 -->
+    <ul>
+        @foreach($messages as $message)
+            <li>
+                [{{$message->created_at}}]
+                {{$message->getDisplayName()}}:
+                {{$message->content}}
+            </li>
+        @endforeach
 </body>
 </html>
