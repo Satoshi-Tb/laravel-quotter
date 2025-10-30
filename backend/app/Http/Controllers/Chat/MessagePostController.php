@@ -16,7 +16,8 @@ class MessagePostController extends Controller
     {
         $messageContent = $request->getMessage();
         $userId = $request->getUserId();
-        $chat = Chat::where('id', $chatId)->firstOrFail();
+        $chatIdInt = (int) $chatId;
+        $chat = Chat::where('id', $chatIdInt)->firstOrFail();
 
         // チャットルームに参加しているユーザーか確認する
         if (!($chat->user1_id === $userId || $chat->user2_id === $userId)) {
@@ -24,11 +25,11 @@ class MessagePostController extends Controller
         }
         // メッセージの保存処理
         $message = new Message();
-        $message->chat_id = $chatId;
+        $message->chat_id = $chatIdInt;
         $message->mentioned_user_id = $userId;
         $message->content = $messageContent;
         $message->save();
 
-        return redirect()->route('chat.index', ['chatId' => $chatId]);
+        return redirect()->route('chat.index', ['chatId' => $chatIdInt]);
     }
 }
