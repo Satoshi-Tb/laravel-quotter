@@ -16,7 +16,7 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $quoots = Quoot::with('quser')->orderBy('created_at', 'desc')->get(); // User情報をあわせてロード.作成日時の降順で取得
+        $quoots = [];
         $loginId = Auth::id();
         $onlyFollowees = $request->input('onlyFollowees', '0') === '1';
         if ($onlyFollowees && $loginId) {
@@ -28,10 +28,13 @@ class IndexController extends Controller
             // 自身のIDも含める
             $followeeIds[] = $loginId;
 
-            // フォロー中ユーザ、および自身のQuootのみフィルタリング
-            $quoots = $quoots->filter(function ($quoot) use ($followeeIds) {
-                return in_array($quoot->quser->id, $followeeIds);
-            });
+            // フォロー中ユーザ、および自身のQuootのみ取得
+            $quoots = Quoot::with('quser')
+              ->whereIn('user_id', $followeeIds)
+              ->orderBy('created_at', 'desc')
+              ->get();
+        } else {
+            $quoots = Quoot::with('quser')->orderBy('created_at', 'desc')->get();
         }
 
         if ($loginId) {
