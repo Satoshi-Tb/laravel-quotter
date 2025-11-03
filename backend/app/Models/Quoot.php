@@ -19,6 +19,12 @@ class Quoot extends Model
         return $this->belongsTo(Quser::class, 'user_id');
     }
 
+    public function getUserName(): ?string
+    {
+        return $this->quser?->user_name;
+    }
+
+
     public function getDisplayName(): ?string
     {
         return $this->quser?->display_name;
