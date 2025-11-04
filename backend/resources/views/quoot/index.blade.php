@@ -2,8 +2,6 @@
     <x-header></x-header>
     <x-main>
         @if (\Illuminate\Support\Facades\Auth::check())
-            <button onClick="location.href='/quoot/create'">Quoot作成画面へ</button>
-            <button onClick="location.href='/user/{{rawurlencode($userName)}}'">マイページへ</button>
             <!-- フォロー中のみ表示チェックを設ける -->
             <form method="GET" action="/quoot" style="display: inline;">
                 @csrf
