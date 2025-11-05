@@ -1,5 +1,6 @@
 @props([
-    'quoots'=>[],
+    'quoots' => [],
+    'redirect' => '/quoot',
 ])
 
 <div class="bg-white rounded-md shadow-lg mt-5 mb-5 overflow-auto">
@@ -15,8 +16,8 @@
                 
                 @if(\Illuminate\Support\Facades\Auth::id() === $quoot->user_id)
                     <div class="mt-2 text-xs text-right">
-                        <button onClick="location.href='/quoot/update/{{$quoot->id}}?redirect=/quoot'">更新</button>
-                        <form style="display:inline" action="{{route('quoot.delete', ['quootId' => $quoot->id, 'redirect' => '/quoot'])}}" method="post">
+                        <button onClick="location.href='{{ route('quoot.update', ['quootId' => $quoot->id, 'redirect' => $redirect]) }}'">更新</button>
+                        <form style="display:inline" action="{{ route('quoot.delete', ['quootId' => $quoot->id, 'redirect' => $redirect]) }}" method="post">
                             @method('DELETE')
                             @csrf
                             <button type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>

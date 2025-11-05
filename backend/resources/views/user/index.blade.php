@@ -17,7 +17,7 @@
 
         <div class="flex flex-wrap justify-center">
             @if (!$isMyPage)
-                @if(!$hasFollowed)
+                @if (!$hasFollowed)
                     <div>
                         <form action="/user/{{$userName}}/follow" method="post">
                             @csrf
@@ -43,9 +43,10 @@
                 <x-element.link-get :href="route('user.edit',['userName'=>$userName])">プロフィールを編集</x-element.link-get>
             @endif
         </div>
-
-        <x-quoot.list :quoots="$quoots"></x-quoot.list>
-
+        @php
+            $redirectUrl = isset($userName) ? '/user/' . $userName : '/quoot';
+        @endphp
+        <x-quoot.list :quoots="$quoots" :redirect="$redirectUrl"></x-quoot.list>
     </x-main>    
     
 </x-layout>
