@@ -2,7 +2,7 @@
     'messages'=>[],
 ])
 
-<div class="bg-white rounded-md shadow-lg mt-5 mb-5 p-4">
+<div id="scrollTarget" class="bg-white rounded-md shadow-lg mt-5 mb-5 p-4 overflow-y-auto max-h-96">
     <ul>
         @foreach($messages as $message)
             @if(\Illuminate\Support\Facades\Auth::id()===$message->mentioned_user_id)
