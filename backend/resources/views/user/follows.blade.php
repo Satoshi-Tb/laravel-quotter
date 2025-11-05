@@ -1,21 +1,9 @@
-<!doctype html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Quotter</title>
-</head>
-<body>
-    <h1>Quotter</h1>
-    <h2>ユーザ {{$userName}} がフォロー中</h2>
-    <button onClick="location.href='/quoot'">Quoot一覧へ</button>
-    <button onClick="location.href='/user/{{$userName}}'">ユーザページへ</button>
-    @foreach ($followedUsers as $follow)
-        <div style="border: 1px solid black; margin: 10px; padding: 10px;">
-            <p> ユーザ名: <a href="/user/{{$follow->user_name}}">{{$follow->display_name}}</a></p>
+<x-layout>
+    <x-header></x-header>
+    <x-main>
+        <div class="flex justify-center">
+            <h2 class="text-lg font-bold mb-4">{{$userName}} さんがフォロー中</h2>
         </div>
-    @endforeach
-</body>
-</html>
+        <x-user.list :users="$followedUsers"></x-user.list>
+    </x-main>
+</x-layout>
