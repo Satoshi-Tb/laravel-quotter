@@ -25,6 +25,7 @@ class EditRequest extends FormRequest
         return [
             'display_name' => ['required', 'max:50'],
             'profile' => ['max:160'],
+            'profile_image' => ['nullable', 'image', 'max:1024', 'mimes:jpeg,jpg,png,gif'], // プロフィール画像のバリデーション
         ];
     }
 
@@ -42,5 +43,13 @@ class EditRequest extends FormRequest
     public function getProfile(): ?string
     {
         return $this->input('profile'); // プロフィールはnull許容
+    }
+
+    /**
+     * Get the profile image from the request.
+     */
+    public function getProfileImage()
+    {
+        return $this->file('profile_image');
     }
 }
