@@ -31,6 +31,7 @@ class Quser extends Authenticatable implements MustVerifyEmailContract
 
     public function getImagePath()
     {
-        return $this->image->path;
+        // イメージIDがセットされている場合のみ、imageデータを取得してパスを返す
+        return $this->profile_image_id ? $this->image->path : null;
     }
 }
