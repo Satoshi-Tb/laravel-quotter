@@ -23,4 +23,14 @@ class Quser extends Authenticatable implements MustVerifyEmailContract
     {
         return $this->hasMany(Quoot::class);
     }
+
+    public function image()
+    {
+        return $this->hasOne(Image::class, 'id', 'profile_image_id');
+    }
+
+    public function getImagePath()
+    {
+        return $this->image->path;
+    }
 }

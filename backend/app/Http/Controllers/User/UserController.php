@@ -27,11 +27,14 @@ class UserController extends Controller
 
         $isMyPage = Auth::check() && Auth::id() === $quser->id;
 
+        $imagePath = $quser->profile_image_id ? $quser->getImagePath() : null;
+
         return view('user.index')->with([
             'userName' => $userName,
             'displayName' => $quser->display_name,
             'profile' => $quser->profile,
             'quoots' => $quoots,
+            'imagePath' => $imagePath,
             'hasFollowed' => $hasFollowed,
             'isMyPage' => $isMyPage,
         ]);

@@ -3,9 +3,16 @@
     <x-main>
         <div class="h-8"></div>
         <div class="flex justify-between">
-            <div class="ml-8">
-                <h2 class="text-3xl font-bold mb-4">{{$displayName}}</h2>
-                <p>{!!nl2br(e($profile))!!}</p>
+            <div class="flex items-center">
+                @if ($imagePath)
+                    <img src="{{ asset('storage/' . $imagePath) }}" alt="プロフィール画像" class="w-20 h-20 rounded-full object-cover">
+                @else
+                    <img src="{{ asset('storage/app/public/default_profile_icon.png') }}" alt="プロフィール画像" class="w-20 h-20 rounded-full object-cover">
+                @endif
+                <div class="ml-8">
+                    <h2 class="text-3xl font-bold mb-4">{{$displayName}}</h2>
+                    <p>{!!nl2br(e($profile))!!}</p>
+                </div>
             </div>
             <div>
                 <ul class="flex space-x-4">
