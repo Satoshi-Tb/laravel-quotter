@@ -32,7 +32,7 @@ Route::prefix('/user/{userName}')->group(function () {
 Route::prefix('/user/{userName}')->middleware('auth')->group(function () {
     Route::post('/chat', \App\Http\Controllers\Chat\MakeChatRoomController::class);
     Route::post('/follow', \App\Http\Controllers\User\FollowAction\FollowUserController::class);
-    Route::delete('/follow', \App\Http\Controllers\User\FollowAction\UnFollowUserController::class);
+    Route::delete('/follow', \App\Http\Controllers\User\FollowAction\UnfollowUserController::class);
     Route::get('/follows', \App\Http\Controllers\User\FollowsController::class)->name('user.follows');
     Route::get('/followers', \App\Http\Controllers\User\FollowersController::class)->name('user.followers');
     Route::get('/edit', \App\Http\Controllers\User\Edit\EditController::class)->name('user.edit');

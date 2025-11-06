@@ -7,6 +7,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @property-read \App\Models\Image|null $image
+ */
 class Quser extends Authenticatable implements MustVerifyEmailContract
 {
     use HasFactory;
